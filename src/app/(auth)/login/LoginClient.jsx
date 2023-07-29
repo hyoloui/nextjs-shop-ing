@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import Loader from "@/components/loader/Loader";
 import Input from "@/components/input/Input";
 import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
+import Divider from "@/components/divider/Divider";
 
 import LogoPath from "@/assets/colorful.svg";
 
@@ -71,7 +72,13 @@ const LoginClient = () => {
                 onChange={(e) => setIsAutoLogin(e.target.checked)}
               />
             </div>
-            <div className={styles.buttonGroup}>{/* Button */}Button</div>
+            <div className={styles.buttonGroup}>
+              {/* Button */}
+              Button
+              <Divider />
+              Button
+              <Divider />
+            </div>
             <div>{/* Button */}Button</div>
           </form>
         </div>
