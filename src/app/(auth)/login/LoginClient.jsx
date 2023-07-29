@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -8,6 +9,7 @@ import Loader from "@/components/loader/Loader";
 import Input from "@/components/input/Input";
 import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
 import Divider from "@/components/divider/Divider";
+import Button from "@/components/button/Button";
 
 import LogoPath from "@/assets/colorful.svg";
 
@@ -65,6 +67,7 @@ const LoginClient = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+
             <div className={styles.group}>
               {/* 자동 로그인, 비밀번호 수정 */}
               <AutoSignInCheckbox
@@ -72,14 +75,29 @@ const LoginClient = () => {
                 onChange={(e) => setIsAutoLogin(e.target.checked)}
               />
             </div>
+
             <div className={styles.buttonGroup}>
               {/* Button */}
-              Button
+
+              <Button type="submit" width="100%">
+                로그인
+              </Button>
+
               <Divider />
-              Button
+
+              <Link href={"/register"}>
+                <Button width="100%" secondary>
+                  회원가입
+                </Button>
+              </Link>
+
               <Divider />
             </div>
-            <div>{/* Button */}Button</div>
+
+            <div>
+              {/* Button */}
+              <Button onClick={signInWithGoogle}>구글 로그인</Button>
+            </div>
           </form>
         </div>
       </section>
