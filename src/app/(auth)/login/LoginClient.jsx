@@ -6,6 +6,7 @@ import React, { useState } from "react";
 
 import Loader from "@/components/loader/Loader";
 import Input from "@/components/input/Input";
+import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
 
 import LogoPath from "@/assets/colorful.svg";
 
@@ -64,7 +65,11 @@ const LoginClient = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className={styles.group}>
-              {/* 자동 로그인, 비밀번호 수정 */}자동 로그인, 비밀번호 수정
+              {/* 자동 로그인, 비밀번호 수정 */}
+              <AutoSignInCheckbox
+                checked={isAutoLogin}
+                onChange={(e) => setIsAutoLogin(e.target.checked)}
+              />
             </div>
             <div className={styles.buttonGroup}>{/* Button */}Button</div>
             <div>{/* Button */}Button</div>
