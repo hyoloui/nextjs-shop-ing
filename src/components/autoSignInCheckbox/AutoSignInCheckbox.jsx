@@ -3,7 +3,7 @@ import React from "react";
 import Checkbox from "@/components/checkbox/Checkbox";
 import Tooltip from "@/components/tooltip/Tooltip";
 
-import styles from "./AutosignInCheckbox.module.scss";
+import styles from "./AutoSignInCheckbox.module.scss";
 
 const AutoSignInCheckbox = ({
   label = "자동 로그인",
@@ -24,7 +24,14 @@ const AutoSignInCheckbox = ({
         {...restProps}
       />
 
-      {checked && <Tooltip />}
+      {checked && (
+        <Tooltip
+          left={-5}
+          top={24}
+          orientation={orientation}
+          message={message}
+        />
+      )}
     </div>
   );
 };
