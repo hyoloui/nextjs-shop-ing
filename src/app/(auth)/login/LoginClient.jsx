@@ -48,6 +48,7 @@ const LoginClient = () => {
             {/* Input */}
             <Input
               email
+              autoComplete="email"
               icon="letter"
               id="email"
               name="email"
@@ -59,6 +60,7 @@ const LoginClient = () => {
             />
             <Input
               password
+              autoComplete="current-password"
               icon="lock"
               id="password"
               name="password"

@@ -40,6 +40,7 @@ const RegisterClient = () => {
             {/* Input */}
             <Input
               email
+              autoComplete="new-email"
               icon="letter"
               id="email"
               name="email"
@@ -51,8 +52,9 @@ const RegisterClient = () => {
             />
             <Input
               password
+              autoComplete="new-password"
               icon="lock"
-              id="password"
+              id="regiser-password"
               name="password"
               label="비밀번호"
               placeholder="비밀번호"
@@ -62,8 +64,9 @@ const RegisterClient = () => {
             />
             <Input
               password
+              autoComplete="new-password"
               icon="lock"
-              id="password"
+              id="confirm-password"
               name="password"
               label="비밀번호 확인"
               placeholder="비밀번호 확인"
