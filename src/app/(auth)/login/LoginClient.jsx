@@ -1,19 +1,19 @@
 "use client";
 
+import styles from "./Auth.module.scss";
+import LogoPath from "@/assets/colorful.svg";
+
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import Loader from "@/components/loader/Loader";
 import Input from "@/components/input/Input";
 import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
 import Divider from "@/components/divider/Divider";
 import Button from "@/components/button/Button";
-
-import LogoPath from "@/assets/colorful.svg";
-
-import styles from "./Auth.module.scss";
 
 const LoginClient = () => {
   const [email, setEmail] = useState("");
@@ -29,6 +29,7 @@ const LoginClient = () => {
 
   const loginUser = (event) => {
     event.preventDefault();
+    toast.info("성공~");
     setIsLoading(true);
   };
 
