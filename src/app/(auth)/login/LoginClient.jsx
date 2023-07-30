@@ -9,6 +9,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
+import { auth } from "@/firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 import Loader from "@/components/loader/Loader";
 import Input from "@/components/input/Input";
 import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
@@ -29,8 +32,18 @@ const LoginClient = () => {
 
   const loginUser = (event) => {
     event.preventDefault();
-    toast.info("성공~");
     setIsLoading(true);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        setIsLoading(false);
+        toast.success("로그인에 성공 했습니다.");
+        redirectUser();
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast.error(error.message);
+      });
   };
 
   const signInWithGoogle = () => {};
