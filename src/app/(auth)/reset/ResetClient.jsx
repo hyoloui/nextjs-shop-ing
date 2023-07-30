@@ -4,6 +4,10 @@ import styles from "./ResetClient.module.scss";
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { toast } from "react-toastify";
+
+import { auth } from "@/firebase/firebase";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 import Loader from "@/components/loader/Loader";
 import Heading from "@/components/heading/Heading";
@@ -17,6 +21,16 @@ const ResetClient = () => {
   const resetPassword = (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setIsLoading(false);
+        toast.success("비밀번호 업데이트를 위한 메일이 발송되었습니다.");
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast.error(error.message);
+      });
   };
 
   return (
