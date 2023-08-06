@@ -11,16 +11,18 @@ import { auth } from "@/firebase/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
 import InnerHeader from "../innerHeader/InnerHeader";
+import { useDispatch } from "react-redux";
+import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "@/redux/slice/authSlice";
 
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const dispatch = useDispatch();
+
   const [displayName, setDisplayName] = useState("");
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log(user);
-
       if (user) {
         if (user.displayName == null) {
           const u1 = user.email.substring(0, user.email.indexOf("@"));
@@ -30,12 +32,20 @@ const Header = () => {
           setDisplayName(user.displayName);
         }
         // 유저 정보를 리덕스 스토어에 저장하기
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userName: user.displayName ? user.displayName : displayName,
+            userID: user.uid,
+          })
+        );
       } else {
         setDisplayName("");
         // 유저정보를 리덕스 스토어에서 지우기
+        dispatch(REMOVE_ACTIVE_USER());
       }
     });
-  }, []);
+  }, [dispatch, displayName]);
 
   const logoutUser = (e) => {
     e.preventDefault();
@@ -61,6 +71,10 @@ const Header = () => {
       <div className={styles.loginBar}>
         <ul className={styles.list}>
           <>
+            <li className={styles.item}>
+              <Link href={"/login"}>로그인</Link>
+            </li>
+
             <li className={styles.item}>
               <Link href={"/admin/dashboard"}>관리자</Link>
             </li>
