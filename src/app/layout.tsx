@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import { Inter } from "next/font/google";
+import Providers from "@/redux/provider";
 import ToastProvider from "@/components/toastProvider/ToastProvider";
 
 import Header from "@/layouts/header/Header";
@@ -21,10 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <ToastProvider />
-        {children}
-        <Footer />
+        <Providers>
+          <Header />
+          <ToastProvider />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
