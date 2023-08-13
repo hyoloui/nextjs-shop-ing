@@ -4,6 +4,11 @@ import styles from "./AddProduct.module.scss";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "react-toastify";
+
+import { db, storage } from "@/firebase/firebase";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 
 import Loader from "@/components/Loader/Loader";
 import Heading from "@/components/heading/Heading";
@@ -40,7 +45,31 @@ const AddProductClient = () => {
 
   const router = useRouter();
 
-  const handleImageChange = (e) => {};
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    const storageRef = ref(storage, `images/${Date.now()}-${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("👉  handleImageChange  progress:", progress);
+        setUploadProgress(progress);
+      },
+      (error) => {
+        toast.error(error.message);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setProduct({ ...product, imageURL: downloadURL });
+          toast.success("이미지를 성공적으로 업로드했습니다.");
+        });
+      }
+    );
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -49,6 +78,29 @@ const AddProductClient = () => {
 
   const addProduct = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      addDoc(collection(db, "products"), {
+        name: product.name,
+        imageURL: product.imageURL,
+        price: +product.price,
+        category: product.category,
+        brand: product.brand,
+        desc: product.desc,
+        caretedAt: Timestamp.now().toDate(),
+      });
+
+      setIsLoading(false);
+      setUploadProgress(0);
+      setProduct({ ...initialState });
+
+      toast.success("상품을 저장했습니다.");
+      router.push("/admin/all-products");
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -66,7 +118,7 @@ const AddProductClient = () => {
             required
             name="name"
             value={product.name}
-            onChange={(e) => handleImageChange(e)}
+            onChange={(e) => handleInputChange(e)}
           />
 
           <div>
@@ -74,11 +126,11 @@ const AddProductClient = () => {
               <div className={styles.progress}>
                 <div
                   className={styles["progress-bar"]}
-                  styles={{ width: `${uploadProgress}` }}
+                  style={{ width: `${uploadProgress}%` }}
                 >
                   {uploadProgress < 100
                     ? `Uploading... ${uploadProgress}%`
-                    : `Upload Complete`}
+                    : `Upload Complete ${uploadProgress}%`}
                 </div>
               </div>
             )}
