@@ -10,7 +10,7 @@ import { db, storage } from "@/firebase/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 
-import Loader from "@/components/Loader/Loader";
+import Loader from "@/components/loader/Loader";
 import Heading from "@/components/heading/Heading";
 import Button from "@/components/button/Button";
 
