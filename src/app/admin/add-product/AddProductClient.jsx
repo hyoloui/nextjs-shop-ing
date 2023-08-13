@@ -88,7 +88,7 @@ const AddProductClient = () => {
         category: product.category,
         brand: product.brand,
         desc: product.desc,
-        caretedAt: Timestamp.now().toDate(),
+        createdAt: Timestamp.now().toDate(),
       });
 
       setIsLoading(false);
