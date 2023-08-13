@@ -13,6 +13,7 @@ import {
 import useFetchCollection from "@/hooks/useFetchCollection";
 
 import Loader from "@/components/loader/Loader";
+import ProductFilter from "@/components/product/productFilter/ProductFilter";
 import ProductList from "@/components/product/productList/ProductList";
 
 const Product = () => {
@@ -38,7 +39,10 @@ const Product = () => {
 
   return (
     <section className={styles.product}>
-      <aside className={styles.filter}></aside>
+      <aside className={styles.filter}>
+        {" "}
+        {isLoading ? null : <ProductFilter />}
+      </aside>
       <div className={styles.content}>
         {isLoading ? <Loader basic /> : <ProductList products={products} />}
       </div>
