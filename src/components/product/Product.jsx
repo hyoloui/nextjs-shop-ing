@@ -35,8 +35,6 @@ const Product = () => {
     );
   }, [data, dispatch]);
 
-  const products = useSelector(selectProducts);
-
   return (
     <section className={styles.product}>
       <aside className={styles.filter}>
@@ -44,7 +42,7 @@ const Product = () => {
         {isLoading ? null : <ProductFilter />}
       </aside>
       <div className={styles.content}>
-        {isLoading ? <Loader basic /> : <ProductList products={products} />}
+        {isLoading ? <Loader basic /> : <ProductList />}
       </div>
     </section>
   );
