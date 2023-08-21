@@ -5,9 +5,20 @@ import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
 
 import { priceFormat } from "@/utils/priceFormat";
+import useFetchDocuments from "@/hooks/useFetchDocuments";
 import rocketBadgeIcon from "@/assets/badge-rocket.svg";
 
 const ProductItem = ({ id, name, price, imageURL }) => {
+  // const { documents } = useFetchDocuments("reviews", ["productID", "==", id]);
+
+  // let productRating = 0;
+
+  // documents.forEach((doc) => {
+  //   productRating = productRating + doc.rate;
+  // });
+
+  // const rating = productRating / documents.length;
+
   const shortenText = (text, n) => {
     if (text.length > n) {
       const sortenedText = text.substring(0, n).concat("...");
@@ -32,8 +43,16 @@ const ProductItem = ({ id, name, price, imageURL }) => {
             <Image src={rocketBadgeIcon} alt="로켓 배송" />
           </em>
           <div className={styles.rating}>
-            <Rating size={17} readonly initialValue={2} />
-            <span className={styles.ratingCount}>3</span>
+            <Rating
+              size={17}
+              readonly
+              // initialValue={Number.isNaN(rating) ? 0 : rating}
+              initialValue={1}
+            />
+            <span className={styles.ratingCount}>
+              {/* ({documents.length}) */}
+              (1)
+            </span>
           </div>
         </div>
       </div>
