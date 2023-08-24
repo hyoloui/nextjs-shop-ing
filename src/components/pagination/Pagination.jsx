@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import styles from "./Pagination.module.scss";
+
+import { useState } from "react";
 
 const Pagination = ({
   currentPage,
@@ -34,10 +36,45 @@ const Pagination = ({
     }
   };
 
-  for (let i = 0; i < Math.ceil(totalProducts / productsPerPage); i++) {
-    pageNumbers.push[i];
+  // 총 product 수 / 페이지당 product 수 = 총 페이지 수
+  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
+    pageNumbers.push(i);
   }
-  return <div>Pagination</div>;
+  return (
+    <div className={styles.pagination}>
+      <li
+        className={currentPage === pageNumbers[0] ? styles.hidden : ""}
+        onClick={paginatePrevPage}
+      >
+        {"<"}
+      </li>
+
+      {pageNumbers.map((number) => {
+        if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+          return (
+            <li
+              key={number}
+              className={currentPage === number ? styles.active : ""}
+              onClick={() => paginate(number)}
+            >
+              {number}
+            </li>
+          );
+        }
+      })}
+
+      <li
+        className={
+          currentPage === pageNumbers[pageNumbers.length - 1]
+            ? styles.hidden
+            : ""
+        }
+        onClick={paginateNextPage}
+      >
+        {">"}
+      </li>
+    </div>
+  );
 };
 
 export default Pagination;
