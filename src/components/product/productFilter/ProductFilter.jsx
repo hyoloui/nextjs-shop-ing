@@ -10,6 +10,7 @@ import {
 } from "@/redux/slice/productSlice";
 import { FILTER_BY } from "@/redux/slice/filterSlice";
 import { priceFormat } from "@/utils/priceFormat";
+import Button from "@/components/button/Button";
 
 const ProductFilter = () => {
   const [category, setCategory] = useState("All");
@@ -87,6 +88,9 @@ const ProductFilter = () => {
           max={maxPrice}
         />
       </div>
+
+      <br />
+      <Button onClick={clearFilters}>필터 초기화</Button>
     </div>
   );
 };
