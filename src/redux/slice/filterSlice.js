@@ -51,7 +51,7 @@ const filterSlice = createSlice({
       }
 
       if (brand === "All") {
-        tempProducts = products;
+        tempProducts = tempProducts;
       } else {
         tempProducts = tempProducts.filter(
           (product) => product.brand === brand
