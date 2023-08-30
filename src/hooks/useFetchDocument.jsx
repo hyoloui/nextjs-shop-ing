@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
 
 import { doc, getDoc } from "firebase/firestore";
@@ -27,7 +27,7 @@ const useFetchDocument = (collectionName, documentID) => {
     getDocument();
   }, [getDocument]);
 
-  return <div>useFetchDocument</div>;
+  return { document };
 };
 
 export default useFetchDocument;
