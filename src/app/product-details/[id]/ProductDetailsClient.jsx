@@ -9,17 +9,25 @@ import { Rating } from "react-simple-star-rating";
 
 import { priceFormat } from "@/utils/priceFormat";
 import useFetchDocument from "@/hooks/useFetchDocument";
+import useFetchDocuments from "@/hooks/useFetchDocuments";
+
 import Loader from "@/components/loader/Loader";
 import Divider from "@/components/divider/Divider";
+import Button from "@/components/button/Button";
+import ProductReviewItem from "@/components/product/productReviewItem/ProductReviewItem";
 
 import listCashIcon from "@/assets/list-cash-icon.png";
-import Button from "@/components/button/Button";
-import { setIndexConfiguration } from "firebase/firestore";
 
 const ProductDetailsClient = () => {
-  const params = useParams();
+  const { id } = useParams();
 
-  const { document: product } = useFetchDocument("products", params.id);
+  const { document: product } = useFetchDocument("products", id);
+  const { documents: reviews } = useFetchDocuments("reviews", [
+    "productID",
+    "==",
+    id,
+  ]);
+
   const [count, setCount] = useState(1);
 
   const addToCart = () => {};
@@ -112,6 +120,26 @@ const ProductDetailsClient = () => {
           </div>
         </div>
       )}
+      <div className={styles.card}>
+        <h3>상품평 ({reviews.lenght})</h3>
+        <div>
+          {reviews.length === 0 ? (
+            <p className={styles.noReivewText}>등록된 상품평이 없습니다.</p>
+          ) : (
+            <>
+              {reviews.map((item) => (
+                <ProductReviewItem
+                  key={item.id}
+                  rate={item.rate}
+                  review={item.review}
+                  reviewDate={item.reviewDate}
+                  userName={item.userName}
+                />
+              ))}
+            </>
+          )}
+        </div>
+      </div>
     </section>
   );
 };
