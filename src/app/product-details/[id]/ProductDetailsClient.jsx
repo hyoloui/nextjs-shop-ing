@@ -7,19 +7,23 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Rating } from "react-simple-star-rating";
 
+import { useDispatch } from "react-redux";
+import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY } from "@/redux/slice/cartSlice";
+
 import { priceFormat } from "@/utils/priceFormat";
 import useFetchDocument from "@/hooks/useFetchDocument";
 import useFetchDocuments from "@/hooks/useFetchDocuments";
+
+import listCashIcon from "@/assets/list-cash-icon.png";
 
 import Loader from "@/components/loader/Loader";
 import Divider from "@/components/divider/Divider";
 import Button from "@/components/button/Button";
 import ProductReviewItem from "@/components/product/productReviewItem/ProductReviewItem";
 
-import listCashIcon from "@/assets/list-cash-icon.png";
-
 const ProductDetailsClient = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const { document: product } = useFetchDocument("products", id);
   const { documents: reviews } = useFetchDocuments("reviews", [
@@ -30,7 +34,10 @@ const ProductDetailsClient = () => {
 
   const [count, setCount] = useState(1);
 
-  const addToCart = () => {};
+  const addToCart = () => {
+    dispatch(ADD_TO_CART({ ...product, quantity: count }));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
 
   const today = new Date();
   const tomorrow = new Date(today.setDate(today.getDate() + 1));
