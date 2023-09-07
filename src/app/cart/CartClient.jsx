@@ -53,6 +53,16 @@ const CartClient = () => {
     dispatch(CLEAR_CART());
   };
 
+  const url = typeof window !== "undefined" ? window.location.href : "";
+  const checkout = () => {
+    if (isLoggedIn) {
+      router.push("/checkout-address");
+    } else {
+      dispatch(SAVE_URL(url));
+      router.push("/login");
+    }
+  };
+
   useEffect(() => {
     dispatch(CALCULATE_SUBTOTAL());
     dispatch(CALCULATE_TOTAL_QUANTITY());
@@ -145,7 +155,7 @@ const CartClient = () => {
               </div>
             </div>
 
-            <Button onClick={() => {}}>계산하기</Button>
+            <Button onClick={checkout}>계산하기</Button>
           </div>
         </>
       )}
