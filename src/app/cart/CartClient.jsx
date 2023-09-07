@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
   CALCULATE_SUBTOTAL,
+  CLEAR_CART,
+  DECREASE_CART,
+  REMOVE_FROM_CART,
   SAVE_URL,
   selectCartItems,
   selectCartTotalAmount,
@@ -29,11 +32,17 @@ const CartClient = () => {
     dispatch(ADD_TO_CART(cart));
   };
 
-  const decreaseCart = (cart) => {};
+  const decreaseCart = (cart) => {
+    dispatch(DECREASE_CART(cart));
+  };
 
-  const removeFormCart = (cart) => {};
+  const removeFormCart = (cart) => {
+    dispatch(REMOVE_FROM_CART(cart));
+  };
 
-  const clearCart = () => {};
+  const clearCart = () => {
+    dispatch(CLEAR_CART());
+  };
 
   useEffect(() => {
     dispatch(CALCULATE_SUBTOTAL());

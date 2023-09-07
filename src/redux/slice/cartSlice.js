@@ -49,10 +49,12 @@ const cartSlice = createSlice({
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
-    CALCULATE_TOTAL_QUANTITY: (state, action) => {
+
+    CALCULATE_TOTAL_QUANTITY: (state) => {
       const array = [];
       state.cartItems.map((item) => {
         const { cartQuantity } = item;
+
         const quantity = cartQuantity;
         return array.push(quantity);
       });
@@ -63,6 +65,7 @@ const cartSlice = createSlice({
 
       state.cartTotalQuantity = totalQuantity;
     },
+
     CALCULATE_SUBTOTAL: (state) => {
       const array = [];
 
@@ -79,8 +82,47 @@ const cartSlice = createSlice({
 
       state.cartTotalAmount = totalAmount;
     },
+
     SAVE_URL: (state, action) => {
       state.previousUrl = action.payload;
+    },
+
+    DECREASE_CART: (state, action) => {
+      const productIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (productIndex > 1) {
+        state.cartItems[productIndex].cartQuantity -= 1;
+        toast.success(`${action.payload.name} 상품의 수량이 1 감소하였습니다.`);
+      }
+      if (productIndex === 1) {
+        const newCartItems = state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.cartItems = newCartItems;
+        toast.success(
+          `${action.payload.name} 상품이 장바구니에서 삭제되었습니다.`
+        );
+      }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+
+    REMOVE_FROM_CART: (state, action) => {
+      const newCartItems = state.cartItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+      state.cartItems = newCartItems;
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      toast.success(
+        `${action.payload.name} 상품이 장바구니에서 삭제되었습니다.`
+      );
+    },
+
+    CLEAR_CART: (state) => {
+      state.cartItems = [];
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      toast.success("장바구니가 비워졌습니다.");
     },
   },
 });
@@ -90,6 +132,9 @@ export const {
   CALCULATE_TOTAL_QUANTITY,
   CALCULATE_SUBTOTAL,
   SAVE_URL,
+  DECREASE_CART,
+  REMOVE_FROM_CART,
+  CLEAR_CART,
 } = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;
