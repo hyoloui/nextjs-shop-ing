@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./cartClient.module.scss";
+import styles from "./CartClient.module.scss";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -74,12 +74,12 @@ const CartClient = () => {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th className={styles.table__th}>순서</th>
-                <th className={styles.table__th}>상품</th>
-                <th className={styles.table__th}>가격</th>
-                <th className={styles.table__th}>개수</th>
-                <th className={styles.table__th}>합계</th>
-                <th className={styles.table__th}>삭제</th>
+                <th>순서</th>
+                <th>상품</th>
+                <th>가격</th>
+                <th>개수</th>
+                <th>합계</th>
+                <th>삭제</th>
               </tr>
             </thead>
             <tbody>
