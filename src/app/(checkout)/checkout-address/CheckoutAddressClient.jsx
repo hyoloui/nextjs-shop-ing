@@ -11,6 +11,7 @@ import {
 } from "@/redux/slice/checkoutSlice";
 
 import Heading from "@/components/heading/Heading";
+import Button from "@/components/button/Button";
 
 const initailAddressState = {
   name: "",
@@ -32,12 +33,12 @@ const CheckoutAddressClient = () => {
   const router = useRouter();
 
   const handleShipping = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
     setShippingAddress({ ...shippingAddress, [name]: value });
   };
 
   const handleBilling = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
     setBillingAddress({ ...billingAddress, [name]: value });
   };
 
@@ -150,6 +151,8 @@ const CheckoutAddressClient = () => {
               onChange={(e) => handleBilling(e)}
             />
           </label>
+
+          <Button type="submit">주문 하기</Button>
         </div>
       </form>
     </section>
