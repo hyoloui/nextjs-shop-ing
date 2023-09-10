@@ -70,18 +70,18 @@ const CartClient = () => {
   }, [dispatch, cartItems]);
 
   return (
-    <section className={styles.table}>
+    <div className={styles.table}>
       <Heading title="장바구니" />
       {cartItems.length === 0 ? (
         <>
           <p className={styles.emptyText}>장바구니가 비어있습니다.</p>
           <div className={styles.emptyText}>
-            <Link href={"/"}>계속 쇼핑하러 가기</Link>
+            <Link href={"/"}>계속 쇼핑하기</Link>
           </div>
         </>
       ) : (
         <>
-          <table className={styles.table}>
+          <table>
             <thead>
               <tr>
                 <th>순서</th>
@@ -98,7 +98,6 @@ const CartClient = () => {
                 return (
                   <tr key={id}>
                     <td>{index + 1}</td>
-
                     <td>
                       <p>
                         <b>{name}</b>
@@ -110,9 +109,7 @@ const CartClient = () => {
                         height={100}
                       />
                     </td>
-
-                    <tb>{priceFormat(price)}원</tb>
-
+                    <td>{priceFormat(price)}원</td>
                     <td>
                       <div className={styles.count}>
                         <button onClick={() => decreaseCart(cart)}>-</button>
@@ -124,10 +121,8 @@ const CartClient = () => {
                         <button onClick={() => increaseCart(cart)}>+</button>
                       </div>
                     </td>
-
                     <td>{priceFormat(price * cartQuantity)}원</td>
-
-                    <td className={styles.icon}>
+                    <td className={styles.icons}>
                       <FaTrashAlt
                         size={19}
                         color="red"
@@ -142,24 +137,21 @@ const CartClient = () => {
 
           <div className={styles.summary}>
             <Button onClick={clearCart}>카트 비우기</Button>
-
             <div className={styles.checkout}>
               <div className={styles.text}>
-                <h4>총 상품개수</h4>
+                <h4>총 상품 개수</h4>
                 <p>{cartTotalQuantity}개</p>
               </div>
-
               <div className={styles.text}>
                 <h4>합계</h4>
                 <p>{priceFormat(cartTotalAmount)}원</p>
               </div>
+              <Button onClick={checkout}>계산하기</Button>
             </div>
-
-            <Button onClick={checkout}>계산하기</Button>
           </div>
         </>
       )}
-    </section>
+    </div>
   );
 };
 
