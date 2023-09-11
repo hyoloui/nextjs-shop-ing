@@ -35,7 +35,7 @@ const CheckoutClient = () => {
     e.preventDefault();
 
     const tossPayment = await loadTossPayments(
-      process.env.NEXT_PUBLIC_TOSS_PAYMENTS_KEY
+      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY
     );
 
     tossPayment
