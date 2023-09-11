@@ -30,7 +30,7 @@ const CheckoutForm = () => {
   const cartTotalAmount = useSelector(selectCartTotalAmount);
 
   return (
-    <dis className={styles.summary}>
+    <div className={styles.summary}>
       <h3>주문 요약</h3>
       <div>
         {cartItems.length === 0 ? (
@@ -79,7 +79,7 @@ const CheckoutForm = () => {
           </>
         )}
       </div>
-    </dis>
+    </div>
   );
 };
 
