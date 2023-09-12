@@ -65,7 +65,6 @@ const CheckoutClient = () => {
             "Content-Type": "application/json",
           },
         }).then((res) => res.json());
-        console.log("👉 confirmResponse confirmResponse:", confirmResponse);
 
         const today = new Date();
         const date = today.toDateString();
