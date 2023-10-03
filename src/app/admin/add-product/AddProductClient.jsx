@@ -14,7 +14,7 @@ import Loader from "@/components/loader/Loader";
 import Heading from "@/components/heading/Heading";
 import Button from "@/components/button/Button";
 
-const categories = [
+export const categories = [
   { id: 1, name: "Laptops" },
   { id: 2, name: "Electronics" },
   { id: 3, name: "Fashion" },
