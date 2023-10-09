@@ -20,6 +20,7 @@ import { FaCartArrowDown } from "react-icons/fa";
 
 import Heading from "@/components/heading/Heading";
 import InfoBox from "@/components/infoBox/InfoBox";
+import Chart from "@/components/chart/Chart";
 import { priceFormat } from "@/utils/priceFormat";
 
 const earningIcon = <AiFillDollarCircle size={30} color="#b624ff" />;
@@ -67,6 +68,10 @@ const DashboardClient = () => {
           count={`${orders.length} 건`}
           icon={ordersIcon}
         />
+      </div>
+
+      <div>
+        <Chart />
       </div>
     </div>
   );
