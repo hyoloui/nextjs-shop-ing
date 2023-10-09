@@ -28,5 +28,6 @@ export const { STORE_ORDERS, CALCULATE_TOTAL_ORDER_AMOUNT } =
   orderSlice.actions;
 
 export const selectOrderHistory = (state) => state.orders.orderHistory;
+export const selectTotalOrderAmount = (state) => state.orders.totalOrderAmount;
 
 export default orderSlice.reducer;
