@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useFetchCollection from "@/hooks/useFetchCollection";
-import { STORE_ORDERS, selectOrdersHistory } from "@/redux/slice/orderSlice";
+import { STORE_ORDERS, selectOrderHistory } from "@/redux/slice/orderSlice";
 import { selectUserID } from "@/redux/slice/authSlice";
 
 import Loader from "@/components/loader/Loader";
@@ -26,7 +26,7 @@ const OrderHistoryClient = () => {
     dispatch(STORE_ORDERS(data));
   }, [data, dispatch]);
 
-  const orders = useSelector(selectOrdersHistory);
+  const orders = useSelector(selectOrderHistory);
   const userId = useSelector(selectUserID);
 
   const filteredOrders = orders.filter((order) => order.userID === userId);
