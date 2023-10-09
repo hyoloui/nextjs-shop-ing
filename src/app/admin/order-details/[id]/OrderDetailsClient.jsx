@@ -79,7 +79,7 @@ const OrderDetailsClient = () => {
               })}
             </tbody>
           </table>
-          <ChangeOrderStatus />
+          <ChangeOrderStatus order={order} id={id} />
         </>
       )}
     </section>
