@@ -64,7 +64,7 @@ const OrdersClient = () => {
                           className={
                             orderStatus !== "배송완료"
                               ? `${styles.pending}`
-                              : `${styles.deliverd}`
+                              : `${styles.delivered}`
                           }
                         >
                           {orderStatus}
