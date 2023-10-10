@@ -4,7 +4,7 @@ import React from "react";
 import styles from "./Button.module.scss";
 
 interface IButtonProps {
-  type?: "button" | "submit" | "reset" | undefined;
+  type?: "button" | "submit" | "reset";
   secondary?: boolean;
   bgColor?: string;
   fgColor?: string;
