@@ -17,7 +17,7 @@ interface IInputProps {
   readonly?: boolean;
   disabled?: boolean;
   value?: string;
-  error: { message: string };
+  error?: { message: string };
   className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [x: string]: any;

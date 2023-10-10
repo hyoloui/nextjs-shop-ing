@@ -34,7 +34,7 @@ const LoginClient = () => {
     router.push("/");
   };
 
-  const loginUser = (event) => {
+  const loginUser = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
 

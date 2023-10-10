@@ -7,7 +7,7 @@ import styles from "./AutoSignInCheckbox.module.scss";
 
 interface IAutoSignInCheckboxProps {
   label?: string;
-  checked?: boolean;
+  checked: boolean;
   disabled?: boolean;
   orientation?: "top" | "right" | "bottom" | "left";
   message?: string;
