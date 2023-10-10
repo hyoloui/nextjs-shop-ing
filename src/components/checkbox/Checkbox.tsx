@@ -1,12 +1,19 @@
 import React from "react";
 
+interface ICheckboxProps {
+  disabled?: boolean;
+  checked?: boolean;
+  label: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  [x: string]: any;
+}
 const Checkbox = ({
   disabled = false,
   checked = false,
   label,
   onChange,
   ...restProps
-}) => {
+}: ICheckboxProps) => {
   return (
     <label style={{ fontSize: "1.4rem" }}>
       <input
