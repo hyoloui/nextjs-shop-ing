@@ -15,7 +15,7 @@ import Button from "@/components/button/Button";
 const ProductFilter = () => {
   const [category, setCategory] = useState("All");
   const [brand, setBrand] = useState("All");
-  const [price, setPrice] = useState("10000");
+  const [price, setPrice] = useState(10000);
 
   const products = useSelector(selectProducts);
   const minPrice = useSelector(selectMinPrice);
@@ -27,7 +27,7 @@ const ProductFilter = () => {
     ...new Set(products.map((product) => product.category)),
   ];
 
-  const filterCategories = (category) => {
+  const filterCategories = (category: string) => {
     setCategory(category);
   };
 
@@ -83,7 +83,7 @@ const ProductFilter = () => {
         <input
           type="range"
           value={price}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => setPrice(e.target.valueAsNumber)}
           min={minPrice}
           max={maxPrice}
         />

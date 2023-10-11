@@ -5,14 +5,14 @@ import type { RootState } from "@/redux/store";
 
 interface IProductState {
   products: IProduct[];
-  minPrice: number | null;
-  maxPrice: number | null;
+  minPrice: number;
+  maxPrice: number;
 }
 
 const initialState: IProductState = {
   products: [],
-  minPrice: null,
-  maxPrice: null,
+  minPrice: 0,
+  maxPrice: 10000,
 };
 
 const productSlice = createSlice({

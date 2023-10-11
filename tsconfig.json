@@ -4,6 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    "downlevelIteration": true, // Set 메서드를 사용하기 위해 필요
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
