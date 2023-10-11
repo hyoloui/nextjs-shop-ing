@@ -1,12 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import type { TCartItems } from "@/types";
+import type { RootState } from "@/redux/store";
 
-const initialState = {
+interface ICartState {
+  cartItems: TCartItems[];
+  cartTotalQuantity: number;
+  cartTotalAmount: number;
+  previousUrl: string;
+}
+
+const initialState: ICartState = {
   // 아이템들
   cartItems:
     typeof window !== "undefined"
       ? localStorage.getItem("cartItems")
-        ? JSON.parse(localStorage.getItem("cartItems"))
+        ? JSON.parse(localStorage.getItem("cartItems")!)
         : []
       : [],
   // 장바구니 총  갯수
@@ -51,7 +60,7 @@ const cartSlice = createSlice({
     },
 
     CALCULATE_TOTAL_QUANTITY: (state) => {
-      const array = [];
+      const array: number[] = [];
       state.cartItems.map((item) => {
         const { cartQuantity } = item;
 
@@ -67,7 +76,7 @@ const cartSlice = createSlice({
     },
 
     CALCULATE_SUBTOTAL: (state) => {
-      const array = [];
+      const array: number[] = [];
 
       state.cartItems.map((item) => {
         const { cartQuantity, price } = item;
@@ -137,8 +146,10 @@ export const {
   CLEAR_CART,
 } = cartSlice.actions;
 
-export const selectCartItems = (state) => state.cart.cartItems;
-export const selectCartTotalQuantity = (state) => state.cart.cartTotalQuantity;
-export const selectCartTotalAmount = (state) => state.cart.cartTotalAmount;
+export const selectCartItems = (state: RootState) => state.cart.cartItems;
+export const selectCartTotalQuantity = (state: RootState) =>
+  state.cart.cartTotalQuantity;
+export const selectCartTotalAmount = (state: RootState) =>
+  state.cart.cartTotalAmount;
 
 export default cartSlice.reducer;

@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { RootState } from "@/redux/store";
 
-const initialState = {
+interface IAuthState {
+  isLoggedIn: boolean;
+  email: string | null;
+  userName: string | null;
+  userID: string | null;
+}
+const initialState: IAuthState = {
   isLoggedIn: false,
   email: null,
   userName: null,
@@ -29,9 +36,9 @@ const authSlice = createSlice({
 
 export const { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } = authSlice.actions;
 
-export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
-export const selectEmail = (state) => state.auth.email;
-export const selectUserName = (state) => state.auth.userName;
-export const selectUserID = (state) => state.auth.userID;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectEmail = (state: RootState) => state.auth.email;
+export const selectUserName = (state: RootState) => state.auth.userName;
+export const selectUserID = (state: RootState) => state.auth.userID;
 
 export default authSlice.reducer;
