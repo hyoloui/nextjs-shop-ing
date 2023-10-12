@@ -3,7 +3,7 @@ import styles from "./InfoBox.module.scss";
 interface IInfoBoxProps {
   cardClass: string;
   title: string;
-  count: number;
+  count: string;
   icon: React.JSX.Element;
 }
 const InfoBox = ({ cardClass, title, count, icon }: IInfoBoxProps) => {

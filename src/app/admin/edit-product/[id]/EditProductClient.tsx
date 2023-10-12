@@ -3,7 +3,6 @@
 import styles from "@/app/admin/add-product/AddProduct.module.scss";
 import { categories } from "@/app/admin/add-product/AddProductClient";
 
-import store from "@/redux/store";
 import { db, storage } from "@/firebase/firebase";
 import {
   deleteObject,
@@ -14,7 +13,7 @@ import {
 import { Timestamp, doc, setDoc } from "firebase/firestore";
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ChangeEvent, FormEvent } from "react";
 import { toast } from "react-toastify";
 
 import useFetchDocument from "@/hooks/useFetchDocument";
@@ -23,7 +22,7 @@ import Heading from "@/components/heading/Heading";
 import Button from "@/components/button/Button";
 
 const EditProductClient = () => {
-  const { id } = useParams();
+  const { id }: { id: string } = useParams();
   const router = useRouter();
 
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -31,13 +30,13 @@ const EditProductClient = () => {
 
   const { document } = useFetchDocument("products", id);
   const [product, setProduct] = useState(document);
-  console.log("👉  EditProductClient  product:", product);
 
   useEffect(() => {
     setProduct(document);
   }, [document]);
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
     const file = e.target.files[0];
 
     const storageRef = ref(storage, `images/${Date.now()}-${file.name}`);
@@ -62,12 +61,14 @@ const EditProductClient = () => {
     );
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
   };
 
-  const editProduct = (e) => {
+  const editProduct = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -96,7 +97,7 @@ const EditProductClient = () => {
       router.push("/admin/all-products");
     } catch (error) {
       setIsLoading(false);
-      toast.error(error.message);
+      toast.error(getErrorMessage(error));
     }
   };
 

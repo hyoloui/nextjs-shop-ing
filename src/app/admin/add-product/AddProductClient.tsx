@@ -3,7 +3,7 @@
 import styles from "./AddProduct.module.scss";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, type ChangeEvent, FormEvent } from "react";
 import { toast } from "react-toastify";
 
 import { db, storage } from "@/firebase/firebase";
@@ -45,7 +45,8 @@ const AddProductClient = () => {
 
   const router = useRouter();
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
     const file = e.target.files[0];
 
     const storageRef = ref(storage, `images/${Date.now()}-${file.name}`);
@@ -71,12 +72,14 @@ const AddProductClient = () => {
     );
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
   };
 
-  const addProduct = (e) => {
+  const addProduct = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
@@ -99,7 +102,7 @@ const AddProductClient = () => {
       router.push("/admin/all-products");
     } catch (error) {
       setIsLoading(false);
-      toast.error(error.message);
+      toast.error(getErrorMessage(error));
     }
   };
 
@@ -138,7 +141,7 @@ const AddProductClient = () => {
             <input
               type="file"
               placeholder="상품 이미지"
-              acppet="image"
+              accept="image/*"
               name="image"
               required
               onChange={(e) => handleImageChange(e)}
