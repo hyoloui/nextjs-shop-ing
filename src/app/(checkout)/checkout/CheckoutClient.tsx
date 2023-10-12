@@ -21,6 +21,8 @@ import Heading from "@/components/heading/Heading";
 import CheckoutForm from "@/components/checkoutForm/CheckoutForm";
 import Button from "@/components/button/Button";
 
+import type { FormEvent } from "react";
+
 const CheckoutClient = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -31,11 +33,11 @@ const CheckoutClient = () => {
   const userEmail = useSelector(selectEmail);
   const cartTotalAmount = useSelector(selectCartTotalAmount);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const tossPayment = await loadTossPayments(
-      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY
+      process.env.NEXT_PUBLIC_TOSS_CLIENT_KEY!
     );
 
     tossPayment
