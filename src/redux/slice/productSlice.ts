@@ -12,7 +12,7 @@ interface IProductState {
 const initialState: IProductState = {
   products: [],
   minPrice: 0,
-  maxPrice: 10000,
+  maxPrice: 100000,
 };
 
 const productSlice = createSlice({

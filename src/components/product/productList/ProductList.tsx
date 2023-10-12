@@ -9,9 +9,11 @@ import {
 
 import ProductItem from "@/components/product/productItem/ProductItem";
 import Pagenation from "@/components/pagination/Pagination";
+import type { IProduct } from "@/types";
 
-const ProductList = ({}) => {
-  const [sort, setSort] = useState("latest"); // 최신순, 인기순, 낮은가격순, 높은가격순
+type TSort = "latest" | "lowest-price" | "highest-price";
+const ProductList = () => {
+  const [sort, setSort] = useState<TSort>("latest"); // 최신순, 인기순, 낮은가격순, 높은가격순
 
   const filteredProducts = useSelector(selectFilteredProducts); // 필터링된 상품들
 
@@ -34,9 +36,9 @@ const ProductList = ({}) => {
     indexOfLastProduct
   );
 
-  const isRadioSelected = (value: string) => sort === value;
+  const isRadioSelected = (value: TSort) => sort === value;
   const handleRadioClick = (e: ChangeEvent<HTMLInputElement>) =>
-    setSort(e.target.value);
+    setSort(e.target.value as TSort);
 
   return (
     <div className={styles.productList}>
@@ -98,7 +100,7 @@ const ProductList = ({}) => {
           <p>상품이 없습니다.</p>
         ) : (
           <>
-            {currentProducts.map((product) => {
+            {currentProducts.map((product: IProduct) => {
               return (
                 <div key={product.id}>
                   <ProductItem {...product} />

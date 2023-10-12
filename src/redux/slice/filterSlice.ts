@@ -10,6 +10,8 @@ const initialState: IFilterState = {
   filteredProducts: [],
 };
 
+type TSort = "latest" | "lowest-price" | "highest-price";
+
 const filterSlice = createSlice({
   name: "filter",
   initialState,
@@ -89,7 +91,7 @@ const filterSlice = createSlice({
     },
     SORT_PRODUCTS: (
       state,
-      action: { payload: { products: IProduct[]; sort: string } }
+      action: { payload: { products: IProduct[]; sort: TSort } }
     ) => {
       const { products, sort } = action.payload;
       let tempProducts: IProduct[] = [];
