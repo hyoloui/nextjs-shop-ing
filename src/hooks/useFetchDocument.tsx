@@ -1,11 +1,11 @@
 import { useState, useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
 
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, type DocumentData } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 
-const useFetchDocument = (collectionName, documentID) => {
-  const [document, setDocument] = useState(null);
+const useFetchDocument = (collectionName: string, documentID: string) => {
+  const [document, setDocument] = useState<DocumentData | null>(null);
 
   const getDocument = useCallback(async () => {
     const docRef = doc(db, collectionName, documentID);
