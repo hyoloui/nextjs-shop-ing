@@ -31,7 +31,7 @@ const OrderHistoryClient = () => {
 
   const filteredOrders = orders.filter((order) => order.userID === userId);
 
-  const handleClick = (id) => {
+  const handleClick = (id: string) => {
     router.push(`/order-details/${id}`);
   };
 

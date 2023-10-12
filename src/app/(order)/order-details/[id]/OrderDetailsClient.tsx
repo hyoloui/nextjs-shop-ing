@@ -12,13 +12,15 @@ import Button from "@/components/button/Button";
 import useFetchDocument from "@/hooks/useFetchDocument";
 import { priceFormat } from "@/utils/priceFormat";
 
+import type { TCartItems } from "@/types";
+
 const OrderDetailsClient = () => {
   const { id } = useParams();
   const router = useRouter();
 
-  const { document: order } = useFetchDocument("orders", id);
+  const { document: order } = useFetchDocument("orders", id as string);
 
-  const handleClick = (id) => {
+  const handleClick = (id: string) => {
     router.push(`/review-product/${id}`);
   };
 
@@ -55,7 +57,7 @@ const OrderDetailsClient = () => {
               </tr>
             </thead>
             <tbody>
-              {order.cartItems.map((cartItem, index) => {
+              {order.cartItems.map((cartItem: TCartItems, index: number) => {
                 const { id, name, price, imageURL, cartQuantity } = cartItem;
                 return (
                   <tr key={id}>

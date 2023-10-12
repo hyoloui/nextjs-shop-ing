@@ -2,7 +2,7 @@
 
 import styles from "../login/Auth.module.scss";
 
-import React, { useState } from "react";
+import React, { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,11 +23,10 @@ const RegisterClient = () => {
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isAutoLogin, setIsAutoLogin] = useState(false);
 
   const router = useRouter();
 
-  const registerUser = (e) => {
+  const registerUser = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== cPassword) {
       return toast.error("비밀번호가 일치하지 않습니다.");

@@ -5,6 +5,7 @@ import styles from "./CartClient.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FaTrashAlt } from "react-icons/fa";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +26,8 @@ import { selectIsLoggedIn } from "@/redux/slice/authSlice";
 import Heading from "@/components/heading/Heading";
 import Button from "@/components/button/Button";
 import { priceFormat } from "@/utils/priceFormat";
-import { FaTrashAlt } from "react-icons/fa";
+
+import type { TCartItems } from "@/types";
 
 const CartClient = () => {
   const cartItems = useSelector(selectCartItems);
@@ -37,15 +39,15 @@ const CartClient = () => {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const increaseCart = (cart) => {
+  const increaseCart = (cart: TCartItems) => {
     dispatch(ADD_TO_CART(cart));
   };
 
-  const decreaseCart = (cart) => {
+  const decreaseCart = (cart: TCartItems) => {
     dispatch(DECREASE_CART(cart));
   };
 
-  const removeFromCart = (cart) => {
+  const removeFromCart = (cart: TCartItems) => {
     dispatch(REMOVE_FROM_CART(cart));
   };
 

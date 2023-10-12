@@ -4,7 +4,7 @@ import styles from "./ReviewProduct.module.scss";
 
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useSelector } from "react-redux";
 import { selectUserID, selectUserName } from "@/redux/slice/authSlice";
 import { toast } from "react-toastify";
@@ -28,9 +28,9 @@ const ReviewProductClient = () => {
   const userID = useSelector(selectUserID);
   const userName = useSelector(selectUserName);
 
-  const { document: product } = useFetchDocument("products", id);
+  const { document: product } = useFetchDocument("products", id as string);
 
-  const submitReview = (e) => {
+  const submitReview = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const today = new Date();
@@ -50,7 +50,7 @@ const ReviewProductClient = () => {
 
       router.push(`/product-details/${id}`);
     } catch (error) {
-      toast.error(error.message);
+      toast.error(getErrorMessage(error));
     }
   };
 

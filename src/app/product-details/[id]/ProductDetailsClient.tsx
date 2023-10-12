@@ -22,7 +22,7 @@ import Button from "@/components/button/Button";
 import ProductReviewItem from "@/components/product/productReviewItem/ProductReviewItem";
 
 const ProductDetailsClient = () => {
-  const { id } = useParams();
+  const { id }: { id: string } = useParams();
   const dispatch = useDispatch();
 
   const { document: product } = useFetchDocument("products", id);
@@ -128,7 +128,7 @@ const ProductDetailsClient = () => {
         </div>
       )}
       <div className={styles.card}>
-        <h3>상품평 ({reviews.lenght})</h3>
+        <h3>상품평 ({reviews.length})</h3>
         <div>
           {reviews.length === 0 ? (
             <p className={styles.noReivewText}>등록된 상품평이 없습니다.</p>
