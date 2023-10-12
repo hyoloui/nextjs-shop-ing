@@ -8,7 +8,13 @@ import { priceFormat } from "@/utils/priceFormat";
 import useFetchDocuments from "@/hooks/useFetchDocuments";
 import rocketBadgeIcon from "@/assets/badge-rocket.svg";
 
-const ProductItem = ({ id, name, price, imageURL }) => {
+interface IProductItemProps {
+  id: string;
+  name: string;
+  price: number;
+  imageURL: string;
+}
+const ProductItem = ({ id, name, price, imageURL }: IProductItemProps) => {
   // const { documents } = useFetchDocuments("reviews", ["productID", "==", id]);
 
   // let productRating = 0;
@@ -19,7 +25,7 @@ const ProductItem = ({ id, name, price, imageURL }) => {
 
   // const rating = productRating / documents.length;
 
-  const shortenText = (text, n) => {
+  const shortenText = (text: string, n: number) => {
     if (text.length > n) {
       const sortenedText = text.substring(0, n).concat("...");
       return sortenedText;

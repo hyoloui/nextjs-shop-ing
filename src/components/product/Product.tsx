@@ -3,12 +3,8 @@
 import styles from "./Product.module.scss";
 
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  GET_PRICE_RANGE,
-  STORE_PRODUCTS,
-  selectProducts,
-} from "@/redux/slice/productSlice";
+import { useDispatch } from "react-redux";
+import { GET_PRICE_RANGE, STORE_PRODUCTS } from "@/redux/slice/productSlice";
 
 import useFetchCollection from "@/hooks/useFetchCollection";
 

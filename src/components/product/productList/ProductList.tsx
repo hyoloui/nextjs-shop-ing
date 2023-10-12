@@ -1,6 +1,6 @@
 import styles from "./ProductList.module.scss";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectFilteredProducts,
@@ -10,7 +10,7 @@ import {
 import ProductItem from "@/components/product/productItem/ProductItem";
 import Pagenation from "@/components/pagination/Pagination";
 
-const ProductList = () => {
+const ProductList = ({}) => {
   const [sort, setSort] = useState("latest"); // 최신순, 인기순, 낮은가격순, 높은가격순
 
   const filteredProducts = useSelector(selectFilteredProducts); // 필터링된 상품들
@@ -34,8 +34,9 @@ const ProductList = () => {
     indexOfLastProduct
   );
 
-  const isRadioSelected = (value) => sort === value;
-  const handleRadioClick = (e) => setSort(e.target.value);
+  const isRadioSelected = (value: string) => sort === value;
+  const handleRadioClick = (e: ChangeEvent<HTMLInputElement>) =>
+    setSort(e.target.value);
 
   return (
     <div className={styles.productList}>

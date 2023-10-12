@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 import Navbar from "./Navbar";
 
-const NavbarProvider = ({ children }) => {
+const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
   return (

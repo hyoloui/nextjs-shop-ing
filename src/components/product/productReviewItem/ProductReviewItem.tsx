@@ -3,7 +3,18 @@ import styles from "./ProductReviewItem.module.scss";
 import { Rating } from "react-simple-star-rating";
 import { formatTime } from "@/utils/day";
 
-const ProductReviewItem = ({ rate, review, reviewDate, userName }) => {
+interface IProductReviewItemProps {
+  rate: number;
+  review: string;
+  reviewDate: string;
+  userName: string;
+}
+const ProductReviewItem = ({
+  rate,
+  review,
+  reviewDate,
+  userName,
+}: IProductReviewItemProps) => {
   return (
     <div className={styles.reivew}>
       <p className={styles.writer}>
