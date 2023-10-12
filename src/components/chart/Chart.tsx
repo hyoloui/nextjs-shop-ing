@@ -29,7 +29,7 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: "top",
+      position: "top" as const,
     },
     title: {
       display: true,
@@ -40,14 +40,14 @@ export const options = {
 const Chart = () => {
   const orders = useSelector(selectOrderHistory);
 
-  const array = [];
+  const array: string[] = [];
 
   orders.map((order) => {
     const { orderStatus } = order;
     array.push(orderStatus);
   });
 
-  const getOrderStatusCount = (arr, value) => {
+  const getOrderStatusCount = (arr: string[], value: string) => {
     return arr.filter((n) => n === value).length;
   };
 

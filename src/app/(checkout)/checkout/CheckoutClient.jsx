@@ -18,7 +18,7 @@ import {
 } from "@/redux/slice/cartSlice";
 
 import Heading from "@/components/heading/Heading";
-import CheckoutForm from "@/components/checkoutform/CheckoutForm";
+import CheckoutForm from "@/components/checkoutForm/CheckoutForm";
 import Button from "@/components/button/Button";
 
 const CheckoutClient = () => {
